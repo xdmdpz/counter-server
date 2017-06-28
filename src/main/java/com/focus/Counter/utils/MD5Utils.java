@@ -1,4 +1,4 @@
-package com.focus.Counter.common.utils;
+package com.focus.Counter.utils;
 
 import java.security.MessageDigest;
 

@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mybatis.mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="counterRecord">
+	<insert id="insertBatch" parameterType="java.util.List" >
+
+		INSERT INTO counterRecord (
+			<trim suffix="" suffixOverrides=",">
+							id,
+							uniqueKey,
+							serverHost,
+							serverIp,
+							clientHost,
+							clientIp,
+							os,
+							browser,
+							creatTime,
+							executeTime,
+						
+			</trim>
+		) values
+		<foreach collection="list" item="item" index="index"
+			separator=",">
+			(
+			<trim suffix="" suffixOverrides=",">
+							#{item.id},
+							#{item.uniqueKey},
+							#{item.serverHost},
+							#{item.serverIp},
+							#{item.clientHost},
+							#{item.clientIp},
+							#{item.os},
+							#{item.browser},
+							#{item.creatTime},
+							#{item.executeTime},
+						
+			</trim>
+		)
+		</foreach>
+	</insert>
+	<insert id="insert" parameterType="com.focus.entity.counterRecord">
+		
+		INSERT INTO counterRecord (
+			<trim suffix="" suffixOverrides=",">
+			
+			<if test="id!='' and id!=null">
+				id,
+			
+			</if>
+			
+			<if test="uniqueKey!='' and uniqueKey!=null">
+				uniqueKey,
+			
+			</if>
+			
+			<if test="serverHost!='' and serverHost!=null">
+				serverHost,
+			
+			</if>
+			
+			<if test="serverIp!='' and serverIp!=null">
+				serverIp,
+			
+			</if>
+			
+			<if test="clientHost!='' and clientHost!=null">
+				clientHost,
+			
+			</if>
+			
+			<if test="clientIp!='' and clientIp!=null">
+				clientIp,
+			
+			</if>
+			
+			<if test="os!='' and os!=null">
+				os,
+			
+			</if>
+			
+			<if test="browser!='' and browser!=null">
+				browser,
+			
+			</if>
+			
+			<if test="creatTime!='' and creatTime!=null">
+				creatTime,
+			
+			</if>
+			
+			<if test="executeTime!='' and executeTime!=null">
+				executeTime,
+			
+			</if>
+						
+			</trim>
+		) values(
+			<trim suffix="" suffixOverrides=",">
+						<if test="id!='' and id!=null">
+				#{id},
+			
+			</if>
+						<if test="uniqueKey!='' and uniqueKey!=null">
+				#{uniqueKey},
+			
+			</if>
+						<if test="serverHost!='' and serverHost!=null">
+				#{serverHost},
+			
+			</if>
+						<if test="serverIp!='' and serverIp!=null">
+				#{serverIp},
+			
+			</if>
+						<if test="clientHost!='' and clientHost!=null">
+				#{clientHost},
+			
+			</if>
+						<if test="clientIp!='' and clientIp!=null">
+				#{clientIp},
+			
+			</if>
+						<if test="os!='' and os!=null">
+				#{os},
+			
+			</if>
+						<if test="browser!='' and browser!=null">
+				#{browser},
+			
+			</if>
+						<if test="creatTime!='' and creatTime!=null">
+				#{creatTime},
+			
+			</if>
+						<if test="executeTime!='' and executeTime!=null">
+				#{executeTime},
+			
+			</if>
+						
+			</trim>
+		)
+	</insert>
+	
+	<update id="updatecounterRecord" parameterType="com.focus.entity.counterRecord" >
+		update counterRecord set
+			<trim suffix="" suffixOverrides=",">
+															
+			<if test="uniqueKey!='' and uniqueKey!=null">
+				uniqueKey = #{uniqueKey} ,
+			
+			</if>
+												
+			<if test="serverHost!='' and serverHost!=null">
+				serverHost = #{serverHost} ,
+			
+			</if>
+												
+			<if test="serverIp!='' and serverIp!=null">
+				serverIp = #{serverIp} ,
+			
+			</if>
+												
+			<if test="clientHost!='' and clientHost!=null">
+				clientHost = #{clientHost} ,
+			
+			</if>
+												
+			<if test="clientIp!='' and clientIp!=null">
+				clientIp = #{clientIp} ,
+			
+			</if>
+												
+			<if test="os!='' and os!=null">
+				os = #{os} ,
+			
+			</if>
+												
+			<if test="browser!='' and browser!=null">
+				browser = #{browser} ,
+			
+			</if>
+												
+			<if test="creatTime!='' and creatTime!=null">
+				creatTime = #{creatTime} ,
+			
+			</if>
+												
+			<if test="executeTime!='' and executeTime!=null">
+				executeTime = #{executeTime} ,
+			
+			</if>
+									
+			</trim>
+		where
+			id = #{id}
+	</update>
+	
+	<delete id="deletecounterRecordByKey" >
+		delete from counterRecord where id = #{id}
+	</delete>
+	
+	<select id="getcounterRecordByKey"  resultType="com.focus.entity.counterRecord">
+		select * from counterRecord where id = #{id}
+	</select>
+	
+	<select id="getcounterRecordByFilters" parameterType="java.util.HashMap" resultType="com.focus.entity.counterRecord">
+		select * from counterRecord 
+		<where>
+			<if test="map!=null">
+				<foreach collection="map" index="key" item="value" separator="and">
+              	${key} = #{value}
+        		</foreach>
+        	</if>
+		</where>
+	</select>
+	
+	<select id="getcounterRecordByFiltersII" parameterType="java.util.HashMap" resultType="com.focus.entity.counterRecord">
+		select * from counterRecord 
+		<where>
+			<if test="map!=null">
+				<foreach collection="map" index="key" item="value" separator="or">
+              	${key} = #{value}
+        		</foreach>
+        	</if>
+		</where>
+	</select>
+	
+	<delete id="deletecounterRecordByFilters" parameterType="java.util.HashMap">
+		delete from counterRecord
+		<where>
+			<if test="map!=null">
+				<foreach collection="map" index="key" item="value" separator="and">
+              	${key} = #{value}
+        		</foreach>
+        	</if>
+		</where>
+	</delete>
+</mapper>

@@ -1,7 +1,6 @@
-package com.focus.Counter.common.entity;
+package com.focus.Counter.entity;
 
 /**
- * GUID唯一码生成助手
  * @author if
  *
  */
@@ -47,24 +46,24 @@ public class RestResponse {
 
 
     public void SuccessReply(String msg, Object data) {
-        this.code = "MC00000";
+        this.code = "000000";
         this.msg = msg;
         this.data = data;
     }
 
     public void SuccessReply(String msg) {
-        this.code = "MC00000";
+        this.code = "000000";
         this.msg = msg;
         this.data = null;
     }
 
     public void NoCountReply(String msg) {
-        this.code = "MC40004";
+        this.code = "000404";
         this.msg = msg;
         this.data = null;
     }
     public void ErrorReply(String msg){
-        this.code = "MC00010";
+        this.code = "000010";
         this.msg = msg;
         this.data = null;
     }
