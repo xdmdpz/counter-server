@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 /**
  * Created by if on 2017/6/27.
@@ -58,9 +59,16 @@ public class CounterController {
         String serverName = request.getServerName();
         String serverPort = request.getServerPort()+"";
         String uniqueKey = MD5Utils.MD5(request.getRemoteHost());
-        String js = "function request(method,url,data,cb_success,cb_fail){if(!url){throw new Error(\"the url argument is request, please check your code.\")}method=(method||\"POST\").toString().toUpperCase();cb_success=cb_success||function(){};cb_fail=cb_fail||function(){};var xmlObj=CreateXMLHttpRequest();xmlObj.onreadystatechange=function(){console.log(xmlObj.readyState);if(xmlObj.readyState===4){if(xmlObj.status===200||xmlObj.status===304){cb_success(xmlObj.responseText)}else{cb_fail(xmlObj.status,xmlObj.statusText)}}};xmlObj.open(method,url,true);var req=JSON.stringify(data);if(method===\"POST\"){xmlObj.setRequestHeader(\"Content-type\",\"application/json\")}xmlObj.send(req)}function CreateXMLHttpRequest(){var xmlObj;if(window.ActiveXObject){try{xmlObj=new ActiveXObject(\"Msxml2.XMLHTTP\")}catch(e){try{xmlObj=new ActiveXObject(\"Microsoft.XMLHTTP\")}catch(E){throwErrorWhenInitXMLObjectError()}}}else{if(window.XMLHttpRequest){xmlObj=new XMLHttpRequest()}else{throwErrorWhenInitXMLObjectError()}}return xmlObj}function throwErrorWhenInitXMLObjectError(){throw new Error(\"you browser does not support async request.\")}request(\"POST\",\"http://" +
-        serverName+":" + serverPort+"/api/counter\",{'uniqueKey':'"+ uniqueKey +"'},function(data){console.log(data)});";
-        return js;
+        String js = "function request(method,url,data,cb_success,cb_fail){if(!url){throw new Error(\"the url argument is request, please check your code.\")}method=(method||\"POST\").toString().toUpperCase();cb_success=cb_success||function(){};cb_fail=cb_fail||function(){};var xmlObj=CreateXMLHttpRequest();xmlObj.onreadystatechange=function(){console.log(xmlObj.readyState);if(xmlObj.readyState===4){if(xmlObj.status===200||xmlObj.status===304){cb_success(xmlObj.responseText)}else{cb_fail(xmlObj.status,xmlObj.statusText)}}};xmlObj.open(method,url,true);var req=JSON.stringify(data);if(method===\"POST\"){xmlObj.setRequestHeader(\"Content-type\",\"application/json\")}xmlObj.send(req)}function CreateXMLHttpRequest(){var xmlObj;if(window.ActiveXObject){try{xmlObj=new ActiveXObject(\"Msxml2.XMLHTTP\")}catch(e){try{xmlObj=new ActiveXObject(\"Microsoft.XMLHTTP\")}catch(E){throwErrorWhenInitXMLObjectError()}}}else{if(window.XMLHttpRequest){xmlObj=new XMLHttpRequest()}else{throwErrorWhenInitXMLObjectError()}}return xmlObj}function throwErrorWhenInitXMLObjectError(){throw new Error(\"you browser does not support async request.\")}request(\"POST\",\"http://";
+        StringBuffer sb  =new StringBuffer();
+        sb.append(js).append(serverName).append(":").append(serverPort).append("/api/counter\",{'uniqueKey':'").append(uniqueKey).append("'},function(data){console.log(data)});");
+
+        return sb.toString();
+    }
+    @ResponseBody
+    @RequestMapping("show")
+    public List showRecord(){
+        return _counterRecordService.getcounterRecordByFilters(null);
     }
 
 }
