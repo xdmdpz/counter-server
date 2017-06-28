@@ -1,5 +1,4 @@
 package com.focus.Counter.entity;
-
 import com.github.pagehelper.Page;
 
 import java.io.Serializable;
@@ -25,6 +24,33 @@ public class PagedResult<t> implements Serializable {
 	private long total;
 	//总页数
 	private long pages;
+	private String param;
+
+	public String getParam() {
+		return param;
+	}
+
+	public void setParam(String param) {
+		this.param = param;
+	}
+
+	public PagedResult<t> toPagedResult(List<t> datas) {
+		if (datas instanceof Page) {
+			Page page = (Page) datas;
+			this.setPageNo(page.getPageNum());
+			this.setPageSize(page.getPageSize());
+			this.setDataList(page.getResult());
+			this.setTotal(page.getTotal());
+			this.setPages(page.getPages());
+		}
+		else {
+			this.setPageNo(1);
+			this.setPageSize(datas.size());
+			this.setDataList(datas);
+			this.setTotal(datas.size());
+		}
+		return this;
+	}
 	public List<t> getDataList() {
 		return dataList;
 	}
@@ -54,24 +80,6 @@ public class PagedResult<t> implements Serializable {
 	}
 	public void setPages(long pages) {
 		this.pages = pages;
-	}
-	
-	public PagedResult<t> toPagedResult(List<t> datas) {
-		if (datas instanceof Page) {
-			Page page = (Page) datas;
-			this.setPageNo(page.getPageNum());
-			this.setPageSize(page.getPageSize());
-			this.setDataList(page.getResult());
-			this.setTotal(page.getTotal());
-			this.setPages(page.getPages());
-		}
-		else {
-			this.setPageNo(1);
-			this.setPageSize(datas.size());
-			this.setDataList(datas);
-			this.setTotal(datas.size());
-		}
-		return this;
 	}
 
 }

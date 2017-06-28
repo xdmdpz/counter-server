@@ -7,10 +7,12 @@ import com.focus.Counter.service.CounterRecordService;
 import com.github.pagehelper.PageHelper;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import java.util.HashMap;
@@ -26,6 +28,10 @@ public class CounterRecordController {
 	@Resource
 	private CounterRecordService _counterRecordService;
 
+	@RequestMapping("index")
+	public String index(){
+		return "index";
+	}
 
 	/**
 	 * 执行新增操作
@@ -93,17 +99,17 @@ public class CounterRecordController {
 	@ResponseBody
 	public RestResponse getcounterRecordByFilters(Integer pageNo, Integer pageSize,RestResponse rp,PagedResult<CounterRecord> page){
 		if(pageNo == null){
-			pageNo = 0;
+			pageNo = 1;
 		}
 		if(pageSize == null){
-			pageSize = 0;
+			pageSize = 10;
 		}
 		List<CounterRecord> list = null;
 		PageHelper.startPage(pageNo, pageSize);
 		Map map = new HashMap();
 		Map param = new HashMap();
 		param.put("map", map);
-		list = _counterRecordService.getcounterRecordByFilters(param);
+		list = _counterRecordService.getcounterRecordByFilters();
 
 		rp.SuccessReply("查询成功",page.toPagedResult(list));
 		return rp;

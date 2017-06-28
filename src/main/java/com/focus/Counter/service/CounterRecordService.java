@@ -52,14 +52,11 @@ public class CounterRecordService {
 	}
 		
 	//根据HashMap组合参数And查询
-	public	List<CounterRecord> getcounterRecordByFilters(Map map){
-		return _counterRecordDao.getcounterRecordByFilters(map);
+	public	List<CounterRecord> getcounterRecordByFilters(){
+		return _counterRecordDao.getcounterRecordByFilters();
 	}
 	
-	//根据HashMap组合参数Or查询
-	public	List<CounterRecord> getcounterRecordByFiltersII(Map map){
-		return _counterRecordDao.getcounterRecordByFilters(map);
-	}
+
 		
 	//根据HashMap组合参数删除
 	public	boolean deletecounterRecordByFilters(Map map){

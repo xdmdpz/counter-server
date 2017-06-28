@@ -23,7 +23,7 @@ public interface ICounterRecordDao {
 	List<CounterRecord> getcounterRecordByKey(String id);
 	
 	//根据HashMap组合参数And查询
-	List<CounterRecord> getcounterRecordByFilters(Map map);
+	List<CounterRecord> getcounterRecordByFilters();
 	
 	//根据HashMap组合参数Or查询
 	List<CounterRecord> getcounterRecordByFiltersII(Map map);

@@ -198,16 +198,8 @@
 		select * from counterRecord where id = #{id}
 	</select>
 
-    <select id="getCounterRecordByFilters" parameterType="java.util.HashMap"
-            resultType="com.focus.Counter.entity.CounterRecord">
+    <select id="getAll" resultType="com.focus.Counter.entity.CounterRecord">
         select * from counterRecord
-        <where>
-            <if test="map!=null">
-                <foreach collection="map" index="key" item="value" separator="and">
-                    ${key} = #{value}
-                </foreach>
-            </if>
-        </where>
     </select>
 
     <select id="getCounterRecordByFiltersII" parameterType="java.util.HashMap"

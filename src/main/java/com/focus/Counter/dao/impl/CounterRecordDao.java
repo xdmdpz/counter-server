@@ -45,8 +45,8 @@ public class CounterRecordDao extends BaseDao implements
 	
 	//根据HashMap组合参数And查询
 	@Override
-	public List<CounterRecord> getcounterRecordByFilters(Map map){
-		List<CounterRecord> result = this.getSqlSession().selectList("CounterRecord.getcounterRecordByFilters", map);
+	public List<CounterRecord> getcounterRecordByFilters(){
+		List<CounterRecord> result = this.getSqlSession().selectList("CounterRecord.getAll", null);
 		return result;
 	}
 	

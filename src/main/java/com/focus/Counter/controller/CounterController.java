@@ -28,17 +28,19 @@ public class CounterController {
      *
      * 添加浏览记录
      *
-     * @param record 主要用于接受UniqueKey 仅支持接受json字符串
+     *
+     * @param uniqueKey 进接受通过get获取到js的请求
      * @param request http请求信息
      * @param rp 封装的请求返回对象
      * @return RestResponse
      */
     @ResponseBody
     @PostMapping("counter")
-    public RestResponse counter(@RequestBody CounterRecord record, HttpServletRequest request, RestResponse rp){
-        if(record.getUniqueKey().equals(MD5Utils.MD5(request.getRemoteHost()))) {
-            record.init(request);
-            if(_counterRecordService.insert(record))
+    public RestResponse counter(String uniqueKey, HttpServletRequest request, RestResponse rp){
+        if(uniqueKey.equals(MD5Utils.MD5(request.getRemoteHost()))) {
+            CounterRecord record = new CounterRecord(request);
+            record.setUniqueKey(uniqueKey);
+             if(_counterRecordService.insert(record))
                 rp.SuccessReply("记录成功");
             else
                 rp.SuccessReply("记录失败");
@@ -50,25 +52,18 @@ public class CounterController {
     /**
      * 获得js 在js中插入UniqueKey
      * @param request http请求信息
-     * @param rp 封装的请求返回对象
      * @return 压缩后的js
      */
     @ResponseBody
     @GetMapping
-    public String get(HttpServletRequest request,RestResponse rp){
+    public String get(HttpServletRequest request){
         String serverName = request.getServerName();
         String serverPort = request.getServerPort()+"";
         String uniqueKey = MD5Utils.MD5(request.getRemoteHost());
-        String js = "function request(method,url,data,cb_success,cb_fail){if(!url){throw new Error(\"the url argument is request, please check your code.\")}method=(method||\"POST\").toString().toUpperCase();cb_success=cb_success||function(){};cb_fail=cb_fail||function(){};var xmlObj=CreateXMLHttpRequest();xmlObj.onreadystatechange=function(){console.log(xmlObj.readyState);if(xmlObj.readyState===4){if(xmlObj.status===200||xmlObj.status===304){cb_success(xmlObj.responseText)}else{cb_fail(xmlObj.status,xmlObj.statusText)}}};xmlObj.open(method,url,true);var req=JSON.stringify(data);if(method===\"POST\"){xmlObj.setRequestHeader(\"Content-type\",\"application/json\")}xmlObj.send(req)}function CreateXMLHttpRequest(){var xmlObj;if(window.ActiveXObject){try{xmlObj=new ActiveXObject(\"Msxml2.XMLHTTP\")}catch(e){try{xmlObj=new ActiveXObject(\"Microsoft.XMLHTTP\")}catch(E){throwErrorWhenInitXMLObjectError()}}}else{if(window.XMLHttpRequest){xmlObj=new XMLHttpRequest()}else{throwErrorWhenInitXMLObjectError()}}return xmlObj}function throwErrorWhenInitXMLObjectError(){throw new Error(\"you browser does not support async request.\")}request(\"POST\",\"http://";
         StringBuffer sb  =new StringBuffer();
-        sb.append(js).append(serverName).append(":").append(serverPort).append("/api/counter\",{'uniqueKey':'").append(uniqueKey).append("'},function(data){console.log(data)});");
+        sb.append("$.ajax({type:\"POST\",url:\"http://").append(serverName).append(":").append(serverPort).append("/api/counter").append("\",data:{uniqueKey:'").append(uniqueKey).append("'},dataType:\"json\",success:function(data){console.log(data);}})");
 
         return sb.toString();
-    }
-    @ResponseBody
-    @RequestMapping("show")
-    public List showRecord(){
-        return _counterRecordService.getcounterRecordByFilters(null);
     }
 
 }
