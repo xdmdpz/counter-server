@@ -3,7 +3,7 @@ package com.focus.Counter.controller;
 import com.focus.Counter.entity.CounterRecord;
 import com.focus.Counter.entity.RestResponse;
 import com.focus.Counter.entity.PagedResult;
-import com.focus.Counter.service.counterRecordService;
+import com.focus.Counter.service.CounterRecordService;
 import com.github.pagehelper.PageHelper;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,26 +12,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.Resource;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 @RestController
 @RequestMapping("/counterRecord")
-public class counterRecordController {
+public class CounterRecordController {
 
-	private static Logger logger = Logger.getLogger(counterRecordController.class);
+	private static Logger logger = Logger.getLogger(CounterRecordController.class);
 	
-	@Autowired
-	private counterRecordService _counterRecordService;
+	@Resource
+	private CounterRecordService _counterRecordService;
 
-	public counterRecordService get_counterRecordService() {
-		return _counterRecordService;
-	}
-
-	public void set_counterRecordService(counterRecordService _counterRecordService) {
-		this._counterRecordService = _counterRecordService;
-	}
 
 	/**
 	 * 执行新增操作

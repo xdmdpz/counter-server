@@ -1,27 +1,28 @@
 package com.focus.Counter.service;
 
-import com.focus.Counter.dao.IcounterRecordDao;
+import com.focus.Counter.dao.ICounterRecordDao;
 import com.focus.Counter.entity.CounterRecord;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.List;
 import java.util.Map;
 
-@Service("_counterRecordService")
-public class counterRecordService {
+@Service
+public class CounterRecordService {
 	
-	private static Logger logger = Logger.getLogger(counterRecordService.class);
+	private static Logger logger = Logger.getLogger(CounterRecordService.class);
 	
-	@Autowired
-	private IcounterRecordDao _counterRecordDao;
+	@Resource
+	private ICounterRecordDao _counterRecordDao;
 
-	public IcounterRecordDao get_counterRecordDao() {
+	public ICounterRecordDao get_counterRecordDao() {
 		return _counterRecordDao;
 	}
 
-	public void set_counterRecordDao(IcounterRecordDao _counterRecordDao) {
+	public void set_counterRecordDao(ICounterRecordDao _counterRecordDao) {
 		this._counterRecordDao = _counterRecordDao;
 	}
 	

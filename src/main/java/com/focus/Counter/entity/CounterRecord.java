@@ -1,75 +1,78 @@
 package com.focus.Counter.entity;
 
 
+import com.focus.Counter.utils.DateUtils;
 import com.focus.Counter.utils.RequestUtils;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.Serializable;
 import java.util.Date;
 
-public class CounterRecord {
-
+public class CounterRecord implements  Serializable {
+    private static final long serialVersionUID = 934073895746700367L;
     private long id;
     private String uniqueKey;
-    private String serverhost;
-    private String serverip;
-    private String clienthost;
-    private String clientip;
+    private String serverHost;
+    private String serverIp;
+    private String clientHost;
+    private String clientIp;
     private String os;
     private String browser;
-    private Date creattime;
-    private Date executetime;
+    private String creatTime;
+    private String executeTime;
 
 
     public void init(HttpServletRequest request) {
-        this.serverhost = request.getHeader("Host");
-        this.serverip = request.getServerName();
-        this.clientip = RequestUtils.getIpAddr(request);
-        this.clienthost = request.getRemoteHost();
+        this.serverHost = request.getHeader("Host");
+        this.serverIp = request.getServerName();
+        this.clientIp = RequestUtils.getIpAddr(request);
+        this.clientHost = request.getRemoteHost();
         this.os = RequestUtils.getOsInfo(request);
         this.browser = RequestUtils.getBrowserInfo(request);
-        this.creattime = new Date();
+        this.creatTime = DateUtils.convertDateToStr(new Date());
 
     }
 
+    public CounterRecord(){}
     public CounterRecord(HttpServletRequest request) {
         init(request);
 
     }
 
-    public CounterRecord(long id, String uniqueKey, String serverhost, String serverip, String clienthost, String clientip, String os, String browser, Date creattime, Date executetime) {
+    public CounterRecord(long id, String uniqueKey, String serverHost, String serverIp, String clientHost, String clientIp, String os, String browser, String creatTime, String executeTime) {
         this.id = id;
         this.uniqueKey = uniqueKey;
-        this.serverhost = serverhost;
-        this.serverip = serverip;
-        this.clienthost = clienthost;
-        this.clientip = clientip;
+        this.serverHost = serverHost;
+        this.serverIp = serverIp;
+        this.clientHost = clientHost;
+        this.clientIp = clientIp;
         this.os = os;
         this.browser = browser;
-        this.creattime = creattime;
-        this.executetime = executetime;
+        this.creatTime = creatTime;
+        this.executeTime = executeTime;
     }
 
-    public CounterRecord(String uniqueKey, String serverhost, String serverip, String clienthost, String clientip, String os, String browser, Date creattime, Date executetime) {
+    public CounterRecord(String uniqueKey, String serverHost, String serverIp, String clientHost, String clientIp, String os, String browser, String creatTime, String executeTime) {
         this.uniqueKey = uniqueKey;
-        this.serverhost = serverhost;
-        this.serverip = serverip;
-        this.clienthost = clienthost;
-        this.clientip = clientip;
+        this.serverHost = serverHost;
+        this.serverIp = serverIp;
+        this.clientHost = clientHost;
+        this.clientIp = clientIp;
         this.os = os;
         this.browser = browser;
-        this.creattime = creattime;
-        this.executetime = executetime;
+        this.creatTime = creatTime;
+        this.executeTime = executeTime;
     }
 
-    public CounterRecord(String serverhost, String serverip, String clienthost, String clientip, String os, String browser, Date creattime, Date executetime) {
-        this.serverhost = serverhost;
-        this.serverip = serverip;
-        this.clienthost = clienthost;
-        this.clientip = clientip;
+    public CounterRecord(String serverHost, String serverIp, String clientHost, String clientIp, String os, String browser, String creatTime, String executeTime) {
+        this.serverHost = serverHost;
+        this.serverIp = serverIp;
+        this.clientHost = clientHost;
+        this.clientIp = clientIp;
         this.os = os;
         this.browser = browser;
-        this.creattime = creattime;
-        this.executetime = executetime;
+        this.creatTime = creatTime;
+        this.executeTime = executeTime;
     }
 
     public long getId() {
@@ -80,7 +83,6 @@ public class CounterRecord {
         this.id = id;
     }
 
-
     public String getUniqueKey() {
         return uniqueKey;
     }
@@ -89,41 +91,37 @@ public class CounterRecord {
         this.uniqueKey = uniqueKey;
     }
 
-    public String getServerhost() {
-        return serverhost;
+    public String getServerHost() {
+        return serverHost;
     }
 
-    public void setServerhost(String serverhost) {
-        this.serverhost = serverhost;
+    public void setServerHost(String serverHost) {
+        this.serverHost = serverHost;
     }
 
-
-    public String getServerip() {
-        return serverip;
+    public String getServerIp() {
+        return serverIp;
     }
 
-    public void setServerip(String serverip) {
-        this.serverip = serverip;
+    public void setServerIp(String serverIp) {
+        this.serverIp = serverIp;
     }
 
-
-    public String getClienthost() {
-        return clienthost;
+    public String getClientHost() {
+        return clientHost;
     }
 
-    public void setClienthost(String clienthost) {
-        this.clienthost = clienthost;
+    public void setClientHost(String clientHost) {
+        this.clientHost = clientHost;
     }
 
-
-    public String getClientip() {
-        return clientip;
+    public String getClientIp() {
+        return clientIp;
     }
 
-    public void setClientip(String clientip) {
-        this.clientip = clientip;
+    public void setClientIp(String clientIp) {
+        this.clientIp = clientIp;
     }
-
 
     public String getOs() {
         return os;
@@ -133,7 +131,6 @@ public class CounterRecord {
         this.os = os;
     }
 
-
     public String getBrowser() {
         return browser;
     }
@@ -142,39 +139,35 @@ public class CounterRecord {
         this.browser = browser;
     }
 
-
-    public Date getCreattime() {
-        return creattime;
+    public String getCreatTime() {
+        return creatTime;
     }
 
-    public void setCreattime(Date creattime) {
-        this.creattime = creattime;
+    public void setCreatTime(String creatTime) {
+        this.creatTime = creatTime;
     }
 
-
-    public Date getExecutetime() {
-        return executetime;
+    public String getExecuteTime() {
+        return executeTime;
     }
 
-    public void setExecutetime(Date executetime) {
-        this.executetime = executetime;
+    public void setExecuteTime(String executeTime) {
+        this.executeTime = executeTime;
     }
-
-
 
     @Override
     public String toString() {
         return "CounterRecord{" +
                 "id=" + id +
                 ", uniqueKey='" + uniqueKey + '\'' +
-                ", serverhost='" + serverhost + '\'' +
-                ", serverip='" + serverip + '\'' +
-                ", clienthost='" + clienthost + '\'' +
-                ", clientip='" + clientip + '\'' +
+                ", serverHost='" + serverHost + '\'' +
+                ", serverIp='" + serverIp + '\'' +
+                ", clientHost='" + clientHost + '\'' +
+                ", clientIp='" + clientIp + '\'' +
                 ", os='" + os + '\'' +
                 ", browser='" + browser + '\'' +
-                ", creattime=" + creattime +
-                ", executetime=" + executetime +
+                ", creatTime=" + creatTime +
+                ", executeTime=" + executeTime +
                 '}';
     }
 }

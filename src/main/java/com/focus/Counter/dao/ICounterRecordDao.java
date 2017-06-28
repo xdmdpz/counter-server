@@ -5,7 +5,7 @@ import com.focus.Counter.entity.*;
 import java.util.List;
 import java.util.Map;
 
-public interface IcounterRecordDao {
+public interface ICounterRecordDao {
 
 	//插入
 	boolean insert(CounterRecord obj);

@@ -1,15 +1,15 @@
 package com.focus.Counter.dao.impl;
 
-import com.focus.Counter.dao.IcounterRecordDao;
+import com.focus.Counter.dao.ICounterRecordDao;
 import com.focus.Counter.entity.CounterRecord;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Map;
 
-@Repository("_counterRecordDao")
-public class counterRecordDao extends BaseDao implements
-		IcounterRecordDao {
+@Repository
+public class CounterRecordDao extends BaseDao implements
+		ICounterRecordDao {
 		
 	//插入
 	@Override
