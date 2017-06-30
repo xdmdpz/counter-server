@@ -199,7 +199,11 @@
 	</select>
 
     <select id="getAll" resultType="com.focus.Counter.entity.CounterRecord">
-        select * from counterRecord
+        select * from counterRecord ORDER BY creatTime DESC
+    </select>
+
+    <select id="getcounterRecordByClientIp" resultType="com.focus.Counter.entity.CounterRecord">
+          select * from counterRecord where clientIp =  #{clientIp} ORDER BY creatTime DESC
     </select>
 
     <select id="getCounterRecordByFiltersII" parameterType="java.util.HashMap"

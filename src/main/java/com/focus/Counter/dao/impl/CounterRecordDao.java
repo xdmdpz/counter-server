@@ -2,6 +2,9 @@ package com.focus.Counter.dao.impl;
 
 import com.focus.Counter.dao.ICounterRecordDao;
 import com.focus.Counter.entity.CounterRecord;
+import com.focus.Counter.entity.PageResult;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -62,5 +65,23 @@ public class CounterRecordDao extends BaseDao implements
 	public boolean deletecounterRecordByFilters(Map map){
 		int num = this.getSqlSession().delete("CounterRecord.deletecounterRecordByFilters", map);
 		return num > 0;
+	}
+
+	@Override
+	public List<CounterRecord> getcounterRecordByClientIp(String clientIp) {
+		List<CounterRecord> result = this.getSqlSession().selectList("CounterRecord.getcounterRecordByClientIp", clientIp);
+		return result;
+	}
+
+	@Override
+	public PageResult<CounterRecord> getPage(PageResult page) {
+		int pageNo = (int)page.getPageNo();
+		int pageSize = (int)page.getPageSize();
+		PageHelper.startPage(pageNo, pageSize);
+		List<CounterRecord> result = this.getSqlSession().selectList("CounterRecord.getAll", null);
+		PageInfo<CounterRecord> pageInfo = new PageInfo<CounterRecord>(result);
+		page.setDataList(pageInfo.getList());
+		page.setTotal(pageInfo.getTotal());
+		return page;
 	}
 }

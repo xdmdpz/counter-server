@@ -8,7 +8,7 @@ import java.util.List;
  * 分页返回数据包专用实体类
  * @author licher
  */
-public class PagedResult<t> implements Serializable {
+public class PageResult<t> implements Serializable {
 
 	/**
 	 * 
@@ -34,7 +34,7 @@ public class PagedResult<t> implements Serializable {
 		this.param = param;
 	}
 
-	public PagedResult<t> toPagedResult(List<t> datas) {
+	public PageResult<t> toPagedResult(List<t> datas) {
 		if (datas instanceof Page) {
 			Page page = (Page) datas;
 			this.setPageNo(page.getPageNum());

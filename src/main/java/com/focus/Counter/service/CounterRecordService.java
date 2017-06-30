@@ -55,9 +55,12 @@ public class CounterRecordService {
 	public	List<CounterRecord> getcounterRecordByFilters(){
 		return _counterRecordDao.getcounterRecordByFilters();
 	}
-	
 
-		
+
+	//根据HashMap组合参数And查询
+	public	List<CounterRecord> getcounterRecordByClientIp(String clientIp){
+		return _counterRecordDao.getcounterRecordByClientIp(clientIp);
+	}
 	//根据HashMap组合参数删除
 	public	boolean deletecounterRecordByFilters(Map map){
 		return _counterRecordDao.deletecounterRecordByFilters(map);

@@ -2,10 +2,13 @@
 
 此服务端使用SpringBoot搭建,可快速打包为docker镜像,数据库使用使用`/bin/db/start_db.sh`在docker快速配置
 
-插件项目地址[1]: [counter-web](https://github.com/xdmdpz/counter-web)      
+插件项目地址[1]: [counter-web](https://github.com/xdmdpz/counter-web)
+      
 项目后台地址[2]: [counter-backStage](https://github.com/xdmdpz/counter-backStage)
-项目服务端地址[3]: [counter-web](https://github.com/xdmdpz/counter-web)
-dockerHub地址[3]: [xdmdpz/counter](https://hub.docker.com/r/xdmdpz/counter/)
+
+项目服务端地址[3]: [counter-server]( https://github.com/xdmdpz/counter-server)
+
+dockerHub地址[4]: [xdmdpz/counter](https://hub.docker.com/r/xdmdpz/counter/)
 
 ```
 │  pom.xml 

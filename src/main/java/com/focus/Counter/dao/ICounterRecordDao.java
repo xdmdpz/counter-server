@@ -30,5 +30,10 @@ public interface ICounterRecordDao {
 	
 	//根据HashMap组合参数删除
 	boolean deletecounterRecordByFilters(Map map);
+
+	//根据HashMap组合参数And查询
+	List<CounterRecord> getcounterRecordByClientIp(String clientIp);
+
+	PageResult<CounterRecord> getPage(PageResult page);
 	
 }
